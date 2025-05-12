@@ -3,3 +3,8 @@ interface NavItem {
  label: string,
  icons?: string
 }
+
+interface TimerInterval {
+  name: string,
+  value: number
+}
