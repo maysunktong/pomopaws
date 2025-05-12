@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const NavItems: NavItemType[] = [
+const NavItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/log", label: "Log" }
 ]

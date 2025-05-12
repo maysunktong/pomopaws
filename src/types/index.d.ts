@@ -1,4 +1,5 @@
-interface NavItemType  {
+interface NavItem {
  href: string,
- label: string
+ label: string,
+ icons?: string
 }
