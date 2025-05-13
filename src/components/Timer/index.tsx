@@ -1,5 +1,6 @@
 "use client";
 import { setMaxListeners } from "events";
+import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const TimerIntervals: TimerInterval[] = [
@@ -30,22 +31,22 @@ const Timer = () => {
   }, [isRunning]);
 
   const startTimer = () => {
-    setIsRunning(prev => !prev);
+    setIsRunning((prev) => !prev);
   };
 
   const cancelTimer = () => {
-    setTime(0)
-    setIsRunning(false)
-  }
+    setTime(0);
+    setIsRunning(false);
+  };
 
   const formatInterval = (seconds: number) => {
     const min = Math.floor(seconds / 60);
     const remainderSec = seconds % 60;
     if (min > 0 && remainderSec > 0) return `${min} min ${remainderSec} sec`;
     if (min > 0 && min < 60) return `${min} min`;
-    if (min >= 60) return `${min / 60} hr`
+    if (min >= 60) return `${min / 60} hr`;
     return `${remainderSec} sec`;
-  }
+  };
 
   return (
     <div>
@@ -63,10 +64,11 @@ const Timer = () => {
       ))}
       <div>{formatInterval(time)}</div>
       <button type="button" onClick={startTimer}>
-        {isRunning ? "Pause" : "Resume"}
+        {isRunning ? <CirclePause color="white" size={48} /> : <CirclePlay color="white" size={48} />}
       </button>
       <button type="button" onClick={cancelTimer}>
-        Cancel
+        {''}
+        <CircleStop color="white" size={48} />
       </button>
     </div>
   );
