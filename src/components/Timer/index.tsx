@@ -1,4 +1,5 @@
 "use client";
+import { setMaxListeners } from "events";
 import { useState, useEffect } from "react";
 
 const TimerIntervals: TimerInterval[] = [
@@ -29,8 +30,7 @@ const Timer = () => {
   }, [isRunning]);
 
   const startTimer = () => {
-    setTime(selectedInterval);
-    setIsRunning(true);
+    setIsRunning(prev => !prev);
   };
 
   const cancelTimer = () => {
@@ -43,7 +43,7 @@ const Timer = () => {
     const remainderSec = seconds % 60;
     if (min > 0 && remainderSec > 0) return `${min} min ${remainderSec} sec`;
     if (min > 0 && min < 60) return `${min} min`;
-    if (min >= 60) return `${min/60} hr`
+    if (min >= 60) return `${min / 60} hr`
     return `${remainderSec} sec`;
   }
 
@@ -63,10 +63,10 @@ const Timer = () => {
       ))}
       <div>{formatInterval(time)}</div>
       <button type="button" onClick={startTimer}>
-        Start
+        {isRunning ? "Pause" : "Resume"}
       </button>
       <button type="button" onClick={cancelTimer}>
-        Button
+        Cancel
       </button>
     </div>
   );
