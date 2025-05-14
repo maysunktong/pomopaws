@@ -30,13 +30,15 @@ const StickerPicker = () => {
         onClick={() => setIsStickerPanelOpen(!isStickerPanelOpen)}
         className="sticker-picker__button"
       >
-        {selectedSticker && selectedSticker !== "Pick a sticker" ? (
-          <img src={selectedSticker} alt="Selected sticker" width={50} />
-        ) : (
-          "Pick a sticker"
-        )}
+        <img
+          src={selectedSticker
+            ? selectedSticker
+            : "../cats/fridge.png"
+          }
+          alt="Selected sticker"
+          width={50}
+        />
       </button>
-
       {isStickerPanelOpen && (
         <ul className="sticker-picker__dropdown">
           {Stickers.map((sticker, index) => (

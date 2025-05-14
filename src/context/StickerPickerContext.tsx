@@ -5,7 +5,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 const StickerPickerContext = createContext<StickerPickerContextType | undefined>(undefined);
 
 export function StickerPickerProvider({ children }: { children: ReactNode }) {
-  const [selectedSticker, setSelectedSticker] = useState<string>("Pick a sticker");
+  const [selectedSticker, setSelectedSticker] = useState<string>("");
 
   return (
     <StickerPickerContext.Provider value={{ selectedSticker, setSelectedSticker }}>

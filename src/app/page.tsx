@@ -5,7 +5,7 @@ import { StickerPickerProvider } from "../context/StickerPickerContext";
 
 export default function Home() {
   return (
-    <div>
+    <div className="container">
       <h1>Home</h1>
       <CatsContextProvider>
         <StickerPickerProvider>
