@@ -3,8 +3,8 @@
 import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
-import StickerPicker from "../../components/StickerPicker";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
+import StickerPicker from "../StickerPicker";
 
 const TimerIntervals: TimerInterval[] = [
   { name: "3s", value: 3 },
@@ -56,9 +56,9 @@ const Timer = () => {
 
   const startTimer = () => {
     if (!isRunning && time > 0) {
-    setHasAwardedSticker(false);
-    setIsRunning(true);
-  }
+      setHasAwardedSticker(false);
+      setIsRunning(true);
+    }
   };
 
   const cancelTimer = () => {
