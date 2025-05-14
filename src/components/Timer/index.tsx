@@ -3,7 +3,7 @@
 import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
-import StickerPicker from "../StickerPIcker";
+import StickerPicker from "../StickerPicker";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
 
 const TimerIntervals: TimerInterval[] = [
@@ -19,16 +19,25 @@ const Timer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const { catStickers, setCatStickers } = useCatsContext();
   const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
+  const [hasAwardedSticker, setHasAwardedSticker] = useState(false);
+
 
   useEffect(() => {
-    if (time === 0 &&
-    isRunning &&
-    selectedInterval ) {
+    if (time === 0 && isRunning && selectedInterval) {
       setIsRunning(false);
       setCatStickers((prev) => [...prev, selectedSticker]);
-      setSelectedSticker("");
+      { selectedSticker && <img src={selectedSticker} alt="Sticker" /> };
+      setHasAwardedSticker(true);
     }
-  }, [time, isRunning, selectedSticker, setCatStickers, selectedInterval, setSelectedSticker]);
+  }, [
+    time,
+    isRunning,
+    selectedSticker,
+    setCatStickers,
+    selectedInterval,
+    setSelectedSticker,
+    hasAwardedSticker
+  ]);
 
   useEffect(() => {
     if (isRunning) {
@@ -46,7 +55,10 @@ const Timer = () => {
   }, [isRunning]);
 
   const startTimer = () => {
-    setIsRunning((prev) => !prev);
+    if (!isRunning && time > 0) {
+    setHasAwardedSticker(false);
+    setIsRunning(true);
+  }
   };
 
   const cancelTimer = () => {
@@ -64,28 +76,41 @@ const Timer = () => {
   };
 
   return (
-    <div>
-      {TimerIntervals.map((interval, index) => (
-        <button
-          type="button"
-          onClick={() => {
-            setSelectedInterval(interval.value);
-            if (!isRunning) setTime(interval.value);
-          }}
-          key={index}
-        >
-          {interval.name}
-        </button>
-      ))}
+    <div className="timer-container">
       <StickerPicker />
-      <div>{formatInterval(time)}</div>
-      <button type="button" onClick={startTimer}>
-        {isRunning ? <CirclePause color="white" size={48} /> : <CirclePlay color="white" size={48} />}
-      </button>
-      <button type="button" onClick={cancelTimer}>
-        {''}
-        <CircleStop color="white" size={48} />
-      </button>
+      <section className="interval-container">
+        <div className="interval-container__interval-name">
+          {formatInterval(time)}
+        </div>
+        <div className="interval-container__interval-variants">
+          {TimerIntervals.map((interval, index) => (
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedInterval(interval.value);
+                if (!isRunning) setTime(interval.value);
+              }}
+              key={index}
+              className="btn-interval"
+            >
+              {interval.name}
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="btn-playback">
+        <button type="button" onClick={startTimer} >
+          {isRunning ? (
+            <CirclePause color="white" size={60} />
+          ) : (
+            <CirclePlay color="white" size={60} />
+          )}
+        </button>
+        <button type="button" onClick={cancelTimer}>
+          {""}
+          <CircleStop color="white" size={60} />
+        </button>
+      </section>
     </div>
   );
 };

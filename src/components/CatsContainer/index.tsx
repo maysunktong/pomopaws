@@ -6,7 +6,7 @@ const CatStickerContainer = () => {
   const { catStickers } = useCatsContext();
 
   return (
-    <div>
+    <div className="cats-container">
       {catStickers.length > 0 ? (
         catStickers.map((sticker, index) => (
           <img

@@ -1,0 +1,112 @@
+@use "../styles/variables.scss" as *;
+
+@mixin button(
+  $bg: $color-primary,
+  $color: $color-white,
+  $padding: $space-2 $space-4,
+  $radius: $radius-lg,
+  $font-size: $font-size-base,
+  $border: none,
+  $hover-bg: darken($bg, 10%),
+  $transition: all 0.2s ease-in-out,
+  $ratio: 0,
+  $width: null,
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+  background-color: $bg;
+  color: $color;
+  font-size: $font-size;
+  font-family: $font-primary;
+  border: $border;
+  border-radius: $radius;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $transition;
+  font-weight: 500;
+  aspect-ratio: $ratio;
+
+  @if $width != null {
+    width: $width;
+  }
+
+  &:hover {
+    background-color: $hover-bg;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin dropdown {
+  position: absolute;
+  margin-top: $space-1;
+  min-width: 300px;
+  height: auto;
+  overflow-y: auto;
+  background-color: $color-background-secondary;
+  border: none;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  z-index: 100;
+  list-style: none;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@mixin dropdown-item {
+  position: relative;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.2s ease;
+
+  img {
+    transition: opacity 0.2s ease;
+  }
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: #f0f0f0;
+
+    img {
+      opacity: 0.4;
+    }
+
+    span {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin flexbox($direction: row, $justify-content: center, $gap: $space-2) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: center;
+  gap: $gap;
+  height: 100%;
+}

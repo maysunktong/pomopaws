@@ -5,14 +5,16 @@ import { StickerPickerProvider } from "../context/StickerPickerContext";
 
 export default function Home() {
   return (
-    <div className="container">
-      <h1>Home</h1>
-      <CatsContextProvider>
-        <StickerPickerProvider>
+    <CatsContextProvider>
+      <div className="content-wrapper">
+        <CatsContainer />
+        <div className="timer-wrapper">
+           <StickerPickerProvider>
           <Timer />
         </StickerPickerProvider>
-        <CatsContainer />
-      </CatsContextProvider>
-    </div>
+        </div>
+       
+      </div>
+    </CatsContextProvider>
   );
 }

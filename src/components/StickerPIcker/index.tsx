@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
-import '../../styles/StickerPicker.scss';
 
 const Stickers = [
   { name: "fasting", icon: "../cats/hungry.png" },
@@ -26,14 +25,8 @@ const StickerPicker = () => {
         onClick={() => setIsStickerPanelOpen(!isStickerPanelOpen)}
         className="sticker-picker__button"
       >
-        <img
-          src={selectedSticker
-            ? selectedSticker
-            : "../cats/read.png"
-          }
-          alt="Selected sticker"
-          width={50}
-        />
+        {selectedSticker && <img src={selectedSticker} alt="Selected sticker" width={50} />}
+        
       </button>
       {isStickerPanelOpen && (
         <ul className="sticker-picker__dropdown">
