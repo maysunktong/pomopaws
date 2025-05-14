@@ -9,9 +9,14 @@ const CatStickerContainer = () => {
     <div>
       {catStickers.length > 0 ? (
         catStickers.map((sticker, index) => (
-          <span key={index} className="text-2xl">
-            {sticker}
-          </span>
+          <img
+            key={index}
+            src={sticker}
+            alt={`Sticker ${index}`}
+            width={50}
+            height={50}
+            className="rounded"
+          />
         ))
       ) : (
         <p>No sticker yet</p>

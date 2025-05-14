@@ -3,9 +3,11 @@
 import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
+import StickerPicker from "../StickerPIcker";
+import { useStickerPickerContext } from "../../context/StickerPickerContext";
 
 const TimerIntervals: TimerInterval[] = [
-  { name: "5s", value: 5 },
+  { name: "3s", value: 3 },
   { name: "15mins", value: 60 * 15 },
   { name: "30mins", value: 60 * 15 * 2 },
   { name: "1hr", value: 60 * 15 * 2 * 2 },
@@ -15,9 +17,18 @@ const Timer = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [isStickerPanelOpen, setIsStickerPanelOpen] = useState(false);
-  const [selectedSticker, setSelectedSticker] = useState();
   const { catStickers, setCatStickers } = useCatsContext();
+  const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
+
+  useEffect(() => {
+    if (time === 0 &&
+    isRunning &&
+    selectedInterval ) {
+      setIsRunning(false);
+      setCatStickers((prev) => [...prev, selectedSticker]);
+      setSelectedSticker("");
+    }
+  }, [time, isRunning, selectedSticker, setCatStickers, selectedInterval, setSelectedSticker]);
 
   useEffect(() => {
     if (isRunning) {
@@ -33,14 +44,6 @@ const Timer = () => {
       return () => clearInterval(interval);
     }
   }, [isRunning]);
-
-
-  useEffect(() => {
-    if (time === 0 && isRunning) {
-      setIsRunning(false)
-      setCatStickers((prev) => [...prev, "😻"]);
-    }
-  }, [time, isRunning]);
 
   const startTimer = () => {
     setIsRunning((prev) => !prev);
@@ -74,6 +77,7 @@ const Timer = () => {
           {interval.name}
         </button>
       ))}
+      <StickerPicker />
       <div>{formatInterval(time)}</div>
       <button type="button" onClick={startTimer}>
         {isRunning ? <CirclePause color="white" size={48} /> : <CirclePlay color="white" size={48} />}

@@ -18,3 +18,8 @@ type CatsContextType = {
   catStickers: string[];
   setCatStickers: React.Dispatch<React.SetStateAction<string[]>>;
 };
+
+type StickerPickerContextType = {
+  selectedSticker: string;
+  setSelectedSticker: React.Dispatch<React.SetStateAction<string>>;
+};

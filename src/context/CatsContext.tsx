@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-const CatsContext = createContext<CatsContextType>('');
+const CatsContext = createContext<CatsContextType | undefined>(undefined);
 
 export function CatsContextProvider({ children }: { children: ReactNode }) {
   const [catStickers, setCatStickers] = useState<string[]>([]);
@@ -14,8 +14,9 @@ export function CatsContextProvider({ children }: { children: ReactNode }) {
 }
 
 export const useCatsContext = () => {
-  if (!useContext(CatsContext)) {
-    throw new Error("useTreeContext must be used within a TreeProvider");
+  const context = useContext(CatsContext);
+  if (context === undefined) {
+    throw new Error("useCatsContext must be used within a CatsContextProvider");
   }
-  return useContext(CatsContext);
-} 
+  return context;
+};

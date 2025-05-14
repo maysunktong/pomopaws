@@ -1,0 +1,60 @@
+'use client'
+
+import { useState } from "react";
+import { useStickerPickerContext } from "../../context/StickerPickerContext";
+import '../../styles/StickerPicker.scss';
+
+const Stickers = [
+  { name: "Blank", icon: "../cats/fridge.png" },
+  { name: "Strong", icon: "../cats/hungry.png" },
+  { name: "Motivated", icon: "../cats/hunt.png" },
+  { name: "Lazy", icon: "../cats/notcare.png" },
+  { name: "Focused", icon: "../cats/phone.png" },
+  { name: "Stressed", icon: "../cats/playful.png" },
+  { name: "Accomplished", icon: "../cats/read.png" },
+  { name: "Excited", icon: "../cats/study.png" },
+  { name: "Adventurous", icon: "../cats/surprised.png" },
+  { name: "Chill", icon: "../cats/trash.png" },
+  { name: "Lonely", icon: "../cats/fridge.png" }
+];
+
+
+const StickerPicker = () => {
+  const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
+  const [isStickerPanelOpen, setIsStickerPanelOpen] = useState(false);
+
+  return (
+    <div className="sticker-picker">
+      <button
+        type="button"
+        onClick={() => setIsStickerPanelOpen(!isStickerPanelOpen)}
+        className="sticker-picker__button"
+      >
+        {selectedSticker && selectedSticker !== "Pick a sticker" ? (
+          <img src={selectedSticker} alt="Selected sticker" width={50} />
+        ) : (
+          "Pick a sticker"
+        )}
+      </button>
+
+      {isStickerPanelOpen && (
+        <ul className="sticker-picker__dropdown">
+          {Stickers.map((sticker, index) => (
+            <li
+              key={index}
+              onClick={() => {
+                setSelectedSticker(sticker.icon);
+                setIsStickerPanelOpen(false);
+              }}
+              className="sticker-picker__item"
+            >
+              <img src={sticker.icon} alt={sticker.name} width={50} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default StickerPicker;
