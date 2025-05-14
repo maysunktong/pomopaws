@@ -4,7 +4,7 @@ import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
-import StickerPicker from "../StickerPicker";
+import StickersContainer from "../StickersContainer";
 
 
 const TimerIntervals: TimerInterval[] = [
@@ -79,7 +79,7 @@ const Timer = () => {
   return (
     <div className="timer-container">
       <section className="interval-container">
-        <StickerPicker />
+        <StickersContainer />
         <div className="interval-container__interval-name">
           {formatInterval(time)}
         </div>

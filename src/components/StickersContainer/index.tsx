@@ -14,7 +14,7 @@ const Stickers = [
   { name: "work", icon: "../cats/work.png" },
 ];
 
-const StickerPicker = () => {
+const StickersContainer = () => {
   const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
   const [isStickerPanelOpen, setIsStickerPanelOpen] = useState(false);
 
@@ -49,4 +49,4 @@ const StickerPicker = () => {
   );
 };
 
-export default StickerPicker;
+export default StickersContainer;
