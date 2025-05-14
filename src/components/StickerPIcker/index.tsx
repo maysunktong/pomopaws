@@ -5,19 +5,15 @@ import { useStickerPickerContext } from "../../context/StickerPickerContext";
 import '../../styles/StickerPicker.scss';
 
 const Stickers = [
-  { name: "Blank", icon: "../cats/fridge.png" },
-  { name: "Strong", icon: "../cats/hungry.png" },
-  { name: "Motivated", icon: "../cats/hunt.png" },
-  { name: "Lazy", icon: "../cats/notcare.png" },
-  { name: "Focused", icon: "../cats/phone.png" },
-  { name: "Stressed", icon: "../cats/playful.png" },
-  { name: "Accomplished", icon: "../cats/read.png" },
-  { name: "Excited", icon: "../cats/study.png" },
-  { name: "Adventurous", icon: "../cats/surprised.png" },
-  { name: "Chill", icon: "../cats/trash.png" },
-  { name: "Lonely", icon: "../cats/fridge.png" }
+  { name: "fasting", icon: "../cats/hungry.png" },
+  { name: "practise", icon: "../cats/hunt.png" },
+  { name: "procrastinate", icon: "../cats/playful.png" },
+  { name: "read", icon: "../cats/read.png" },
+  { name: "research", icon: "../cats/trash.png" },
+  { name: "socialize", icon: "../cats/phone.png" },
+  { name: "study", icon: "../cats/study.png" },
+  { name: "work", icon: "../cats/work.png" },
 ];
-
 
 const StickerPicker = () => {
   const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
@@ -33,7 +29,7 @@ const StickerPicker = () => {
         <img
           src={selectedSticker
             ? selectedSticker
-            : "../cats/fridge.png"
+            : "../cats/read.png"
           }
           alt="Selected sticker"
           width={50}
@@ -51,6 +47,7 @@ const StickerPicker = () => {
               className="sticker-picker__item"
             >
               <img src={sticker.icon} alt={sticker.name} width={50} />
+              <span>{sticker.name}</span>
             </li>
           ))}
         </ul>
