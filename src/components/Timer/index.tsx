@@ -1,7 +1,8 @@
 "use client";
-import { setMaxListeners } from "events";
+
 import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useCatsContext } from "../../context/CatsContext";
 
 const TimerIntervals: TimerInterval[] = [
   { name: "5s", value: 5 },
@@ -14,6 +15,9 @@ const Timer = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [isStickerPanelOpen, setIsStickerPanelOpen] = useState(false);
+  const [selectedSticker, setSelectedSticker] = useState();
+  const { catStickers, setCatStickers } = useCatsContext();
 
   useEffect(() => {
     if (isRunning) {
@@ -29,6 +33,14 @@ const Timer = () => {
       return () => clearInterval(interval);
     }
   }, [isRunning]);
+
+
+  useEffect(() => {
+    if (time === 0 && isRunning) {
+      setIsRunning(false)
+      setCatStickers((prev) => [...prev, "😻"]);
+    }
+  }, [time, isRunning]);
 
   const startTimer = () => {
     setIsRunning((prev) => !prev);

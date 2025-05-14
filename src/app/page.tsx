@@ -1,10 +1,15 @@
+import CatStickerContainer from "../components/CatsContainer";
 import Timer from "../components/Timer";
+import { CatsContextProvider } from "../context/CatsContext";
 
 export default function Home() {
   return (
     <div>
-      home
-      <Timer />
+      <CatsContextProvider>
+        home
+        <Timer />
+        <CatStickerContainer />
+      </CatsContextProvider>
     </div>
   );
 }

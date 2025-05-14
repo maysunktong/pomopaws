@@ -9,7 +9,12 @@ interface TimerInterval {
   value: number
 }
 
+interface CatSticker {
+  id: string,
+  text: string
+}
+
 type CatsContextType = {
-  cats: string[];
-  setCats: React.Dispatch<React.SetStateAction<string[]>>;
+  catStickers: string[];
+  setCatStickers: React.Dispatch<React.SetStateAction<string[]>>;
 };
