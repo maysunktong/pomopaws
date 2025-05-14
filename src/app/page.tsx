@@ -9,11 +9,10 @@ export default function Home() {
       <div className="content-wrapper">
         <CatsContainer />
         <div className="timer-wrapper">
-           <StickerPickerProvider>
-          <Timer />
-        </StickerPickerProvider>
+          <StickerPickerProvider>
+            <Timer />
+          </StickerPickerProvider>
         </div>
-       
       </div>
     </CatsContextProvider>
   );
