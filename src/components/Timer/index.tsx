@@ -3,7 +3,7 @@
 import { CirclePause, CirclePlay, CircleStop } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
-import StickerPicker from "../StickerPicker";
+import StickerPicker from "../../components/StickerPicker";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
 
 const TimerIntervals: TimerInterval[] = [
