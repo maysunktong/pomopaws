@@ -29,6 +29,7 @@ const Timer = () => {
       setCatStickers((prev) => [...prev, selectedSticker]);
       { selectedSticker && <img src={selectedSticker} alt="Sticker" /> };
       setHasAwardedSticker(true);
+      setSelectedInterval(0);
     }
   }, [
     time,
@@ -37,7 +38,8 @@ const Timer = () => {
     setCatStickers,
     selectedInterval,
     setSelectedSticker,
-    hasAwardedSticker
+    hasAwardedSticker,
+    setSelectedInterval
   ]);
 
   useEffect(() => {
@@ -56,11 +58,13 @@ const Timer = () => {
   }, [isRunning]);
 
   const startTimer = () => {
-    if (!isRunning && time > 0) {
-      setHasAwardedSticker(false);
-      setIsRunning(true);
-    }
-  };
+  if (isRunning) {
+    setIsRunning(false);
+  } else if (time > 0) {
+    setHasAwardedSticker(false);
+    setIsRunning(true);
+  }
+};
 
   const cancelTimer = () => {
     setTime(0);
@@ -81,7 +85,7 @@ const Timer = () => {
       <section className="interval-container">
         <StickersContainer />
         <div className="interval-container__interval-name">
-          {formatInterval(time)}
+        {(selectedInterval && time > 0) ? formatInterval(time) : 'Please choose time'}
         </div>
         <div className="interval-container__interval-variants">
           {TimerIntervals.map((interval, index) => (
@@ -102,14 +106,14 @@ const Timer = () => {
       <section className="btn-playback">
         <button type="button" onClick={startTimer} >
           {isRunning ? (
-            <CirclePause color="white" size={60} />
+            <CirclePause color="lightgray" size={60} />
           ) : (
             <CirclePlay color="white" size={60} />
           )}
         </button>
         <button type="button" onClick={cancelTimer}>
           {""}
-          <CircleStop color="white" size={60} />
+          <CircleStop color="darkorange" size={60} />
         </button>
       </section>
     </div>
