@@ -78,8 +78,8 @@ const Timer = () => {
 
   return (
     <div className="timer-container">
-      <StickerPicker />
       <section className="interval-container">
+        <StickerPicker />
         <div className="interval-container__interval-name">
           {formatInterval(time)}
         </div>
