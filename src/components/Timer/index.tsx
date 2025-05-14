@@ -6,6 +6,7 @@ import { useCatsContext } from "../../context/CatsContext";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
 import StickerPicker from "../StickerPicker";
 
+
 const TimerIntervals: TimerInterval[] = [
   { name: "3s", value: 3 },
   { name: "15mins", value: 60 * 15 },
