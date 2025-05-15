@@ -13,25 +13,32 @@ body {
   display: flex;
   flex-direction: column;
   background-color: $color-background-primary;
-  width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  padding: 2rem;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+}
+
+.content-wrapper {
+  background-color: $color-background-light;
+  border-radius: 12px;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .btn-interval {
   @include button($bg: $color-primary, $font-size: $font-size-3xl);
 }
 
-.content-wrapper {
-  background-color: $color-background-light;
-  margin: 3rem;
+.app-wrapper {
   border-radius: 12px;
-  border: $color-background-primary dashed 3px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-
-.content-wrapper > * {
-  direction: ltr;
 }
 
 .timer-wrapper  {
@@ -44,7 +51,6 @@ body {
   z-index: 0;
   justify-content: center;
   align-items: center;
-  padding: $space-4;
 
   &__button {
     @include button($bg: $color-background-light, $radius: 50%, $ratio: 1);

@@ -6,7 +6,7 @@ import { StickerPickerProvider } from "../context/StickerPickerContext";
 export default function Home() {
   return (
     <CatsContextProvider>
-      <div className="content-wrapper">
+      <div className="app-wrapper">
         <div className="timer-wrapper">
           <StickerPickerProvider>
             <Timer />

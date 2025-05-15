@@ -13,13 +13,12 @@ const CatStickerContainer = () => {
             key={index}
             src={sticker}
             alt={`Sticker ${index}`}
-            width={50}
-            height={50}
+            width={200}
             className="rounded"
           />
         ))
       ) : (
-        <p>No sticker yet</p>
+        <p>Start a timer to generate a cat</p>
       )}
     </div>
   );

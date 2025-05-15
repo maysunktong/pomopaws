@@ -25,7 +25,7 @@ const StickersContainer = () => {
         onClick={() => setIsStickerPanelOpen(!isStickerPanelOpen)}
         className="sticker-picker__button"
       >
-        {selectedSticker && <img src={selectedSticker} alt="Selected sticker" width={50} />}
+        {selectedSticker && <img src={selectedSticker} alt="Selected sticker" width={200} />}
         
       </button>
       {isStickerPanelOpen && (
