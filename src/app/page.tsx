@@ -7,12 +7,12 @@ export default function Home() {
   return (
     <CatsContextProvider>
       <div className="content-wrapper">
-        <CatsContainer />
         <div className="timer-wrapper">
           <StickerPickerProvider>
             <Timer />
           </StickerPickerProvider>
         </div>
+        <CatsContainer />
       </div>
     </CatsContextProvider>
   );
