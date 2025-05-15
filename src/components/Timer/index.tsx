@@ -8,7 +8,7 @@ import StickersContainer from "../StickersContainer";
 
 
 const TimerIntervals: TimerInterval[] = [
-  { name: "3s", value: 3 },
+  { name: "Test", value: 3 },
   { name: "15mins", value: 60 * 15 },
   { name: "30mins", value: 60 * 15 * 2 },
   { name: "1hr", value: 60 * 15 * 2 * 2 },
@@ -27,20 +27,10 @@ const Timer = () => {
     if (time === 0 && isRunning && selectedInterval) {
       setIsRunning(false);
       setCatStickers((prev) => [...prev, selectedSticker]);
-      { selectedSticker && <img src={selectedSticker} alt="Sticker" /> };
       setHasAwardedSticker(true);
       setSelectedInterval(0);
     }
-  }, [
-    time,
-    isRunning,
-    selectedSticker,
-    setCatStickers,
-    selectedInterval,
-    setSelectedSticker,
-    hasAwardedSticker,
-    setSelectedInterval
-  ]);
+  }, [time, isRunning, selectedSticker, setCatStickers, selectedInterval]);
 
   useEffect(() => {
     if (isRunning) {
@@ -85,7 +75,7 @@ const Timer = () => {
       <section className="interval-container">
         <StickersContainer />
         <div className="interval-container__interval-name">
-        {(selectedInterval && time > 0) ? formatInterval(time) : 'Please choose time'}
+        {(selectedInterval && time > 0) ? formatInterval(time) : 'Choose time'}
         </div>
         <div className="interval-container__interval-variants">
           {TimerIntervals.map((interval, index) => (
@@ -108,12 +98,12 @@ const Timer = () => {
           {isRunning ? (
             <CirclePause color="lightgray" size={60} />
           ) : (
-            <CirclePlay color="white" size={60} />
+            <CirclePlay color="#81b29a" size={60} />
           )}
         </button>
         <button type="button" onClick={cancelTimer}>
           {""}
-          <CircleStop color="darkorange" size={60} />
+          <CircleStop color="gray" size={60} />
         </button>
       </section>
     </div>

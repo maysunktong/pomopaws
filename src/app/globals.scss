@@ -26,6 +26,11 @@ body {
 .content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  background-color: $color-background-light;
+  height: 90vh;
+  margin: 3rem;
+  border-radius: 12px;
+  border: $color-background-primary dashed 3px;
 }
 
 .timer-wrapper  {
@@ -66,7 +71,7 @@ body {
   &__interval-name {
     @include flexbox;
     font-size: $font-size-5xl;
-    color: $color-background-light;
+    color: $color-background-primary;
   }
 
   &__interval-variants {
