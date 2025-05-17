@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     if (isOpen) {
-      const soundSticker = new Audio('/sounds/meow.mp3');
+      const soundSticker = new Audio('/sounds/meow.wav');
       soundSticker.play().catch(error => {
         console.warn('Sound play failed:', error);
       });
