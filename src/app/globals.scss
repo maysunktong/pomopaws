@@ -96,3 +96,34 @@ body {
   padding: 2rem;
   height: 90vh;
 }
+
+/* Modal */
+
+.modal-overlay {
+  @include overlay-style($overlay-bg-color, $overlay-z-index);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: $modal-bg-color;
+  padding: $modal-padding;
+  border-radius: $modal-border-radius;
+  z-index: $modal-z-index;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

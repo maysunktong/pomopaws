@@ -110,3 +110,15 @@
   gap: $gap;
   height: 100%;
 }
+
+/* Modal */
+
+@mixin overlay-style($bg-color, $z-index) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $bg-color;
+  z-index: $z-index;
+}

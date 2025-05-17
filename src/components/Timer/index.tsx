@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useCatsContext } from "../../context/CatsContext";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
 import StickersContainer from "../StickersContainer";
-
+import Modal from "../UI/Modal";
 
 const TimerIntervals: TimerInterval[] = [
   { name: "Test", value: 3 },
@@ -21,7 +21,7 @@ const Timer = () => {
   const { catStickers, setCatStickers } = useCatsContext();
   const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
   const [hasAwardedSticker, setHasAwardedSticker] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (time === 0 && isRunning && selectedInterval) {
@@ -29,6 +29,7 @@ const Timer = () => {
       setCatStickers((prev) => [...prev, selectedSticker]);
       setHasAwardedSticker(true);
       setSelectedInterval(0);
+      setIsModalOpen(true);
     }
   }, [time, isRunning, selectedSticker, setCatStickers, selectedInterval]);
 
@@ -48,13 +49,13 @@ const Timer = () => {
   }, [isRunning]);
 
   const startTimer = () => {
-  if (isRunning) {
-    setIsRunning(false);
-  } else if (time > 0) {
-    setHasAwardedSticker(false);
-    setIsRunning(true);
-  }
-};
+    if (isRunning) {
+      setIsRunning(false);
+    } else if (time > 0) {
+      setHasAwardedSticker(false);
+      setIsRunning(true);
+    }
+  };
 
   const cancelTimer = () => {
     setTime(0);
@@ -73,9 +74,17 @@ const Timer = () => {
   return (
     <div className="timer-container">
       <section className="interval-container">
+        <div>
+          {isModalOpen && (
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+              <h2>Modal Title</h2>
+              <p>This is modal content.</p>
+            </Modal>
+          )}
+        </div>
         <StickersContainer />
         <div className="interval-container__interval-name">
-        {(selectedInterval && time > 0) ? formatInterval(time) : 'Choose time'}
+          {selectedInterval && time > 0 ? formatInterval(time) : "Choose time"}
         </div>
         <div className="interval-container__interval-variants">
           {TimerIntervals.map((interval, index) => (
@@ -94,7 +103,7 @@ const Timer = () => {
         </div>
       </section>
       <section className="btn-playback">
-        <button type="button" onClick={startTimer} >
+        <button type="button" onClick={startTimer}>
           {isRunning ? (
             <CirclePause color="lightgray" size={60} />
           ) : (

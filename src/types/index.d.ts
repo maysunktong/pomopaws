@@ -23,3 +23,9 @@ type StickerPickerContextType = {
   selectedSticker: string;
   setSelectedSticker: React.Dispatch<React.SetStateAction<string>>;
 };
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
