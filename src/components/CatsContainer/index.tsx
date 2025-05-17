@@ -7,19 +7,19 @@ const CatStickerContainer = () => {
 
   return (
     <div className="cats-container">
-      {catStickers.length > 0 ? (
+      <div> {catStickers.length > 0 ? (
         catStickers.map((sticker, index) => (
           <img
             key={index}
             src={sticker}
             alt={`Sticker ${index}`}
             width={200}
-            className="rounded"
           />
         ))
       ) : (
         <p>Start a timer to generate a cat</p>
-      )}
+      )}</div>
+     
     </div>
   );
 };

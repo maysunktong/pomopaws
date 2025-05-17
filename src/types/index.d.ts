@@ -29,3 +29,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
 }
+
+interface StickersContainerProps {
+  isRunning: boolean;
+}

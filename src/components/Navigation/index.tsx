@@ -11,14 +11,13 @@ const Navigation = () => {
       <Link href="/">
         <img src="/logo/logo.png" alt="logo" width={150} />
       </Link>
-      <ul>
+      <div>
         {NavItems.map((item, index) => (
-          <li key={item.href}>
-            <Link href={item.href}>{item.label}</Link>
-          </li>
+          <Link key={item.href} href={item.href}>
+            {item.label}
+          </Link>
         ))}
-      </ul>
-
+      </div>
     </nav>
   );
 };

@@ -14,7 +14,7 @@ const Stickers = [
   { name: "work", icon: "../cats/work.png" },
 ];
 
-const StickersContainer = () => {
+const StickersContainer: React.FC<StickersContainerProps> = ({ isRunning }) => {
   const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
   const [isStickerPanelOpen, setIsStickerPanelOpen] = useState(false);
 
@@ -25,8 +25,14 @@ const StickersContainer = () => {
         onClick={() => setIsStickerPanelOpen(!isStickerPanelOpen)}
         className="sticker-picker__button"
       >
-        {selectedSticker && <img src={selectedSticker} alt="Selected sticker" width={200} />}
-        
+        {selectedSticker && (
+          <img
+            src={selectedSticker}
+            alt="Selected sticker"
+            width={200}
+            className={isRunning ? "spinning" : ""}
+          />
+        )}
       </button>
       {isStickerPanelOpen && (
         <ul className="sticker-picker__dropdown">
@@ -48,5 +54,6 @@ const StickersContainer = () => {
     </div>
   );
 };
+
 
 export default StickersContainer;

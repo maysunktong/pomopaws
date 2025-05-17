@@ -82,10 +82,10 @@ const Timer = () => {
             </Modal>
           )}
         </div>
-        <StickersContainer />
         <div className="interval-container__interval-name">
           {selectedInterval && time > 0 ? formatInterval(time) : "Choose time"}
         </div>
+        <StickersContainer isRunning={isRunning} />
         <div className="interval-container__interval-variants">
           {TimerIntervals.map((interval, index) => (
             <button

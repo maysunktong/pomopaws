@@ -1,13 +1,13 @@
 @use "../styles/variables.scss" as *;
 
 @mixin button(
-  $bg: $color-primary,
+  $bg: $color-background-light,
   $color: $color-white,
   $padding: $space-2 $space-4,
   $radius: $radius-lg,
-  $font-size: $font-size-base,
+  $font-size: $font-size-sm,
   $border: none,
-  $hover-bg: darken($bg, 10%),
+  $hover-bg: $color-primary,
   $transition: all 0.2s ease-in-out,
   $ratio: 0,
   $width: null,
@@ -19,7 +19,7 @@
   background-color: $bg;
   color: $color;
   font-size: $font-size;
-  font-family: $font-primary;
+  font-family: $font-capriola;
   border: $border;
   border-radius: $radius;
   text-decoration: none;
@@ -90,7 +90,7 @@
   }
 
   &:hover {
-    background-color: #f0f0f0;
+    border-radius: 12px;
 
     img {
       opacity: 0.4;
