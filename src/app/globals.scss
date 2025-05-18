@@ -33,8 +33,7 @@ body {
 .content-wrapper {
   background-color: $color-background-light;
   border-radius: 12px;
-  flex-grow: 1;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .btn-interval {
