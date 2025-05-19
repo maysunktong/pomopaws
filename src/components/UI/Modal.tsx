@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from "react";
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmitButtonClick, buttonText, children }) => {
   useEffect(() => {
     if (isOpen) {
       const soundSticker = new Audio('/sounds/meow.wav');
@@ -16,8 +16,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container">
-        <button type="button" className="modal-close" onClick={onClose}>X</button>
         {children}
+        <button className="button-main" type="button" onClick={onSubmitButtonClick}>{buttonText}</button>
       </div>
     </div>
   );

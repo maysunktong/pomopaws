@@ -14,24 +14,49 @@ const TimerIntervals: TimerInterval[] = [
   { name: "1hr", value: 60 * 15 * 2 * 2 },
 ];
 
+
 const Timer = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const { catStickers, setCatStickers } = useCatsContext();
-  const { selectedSticker, setSelectedSticker } = useStickerPickerContext();
+  const { selectedSticker } = useStickerPickerContext();
   const [hasAwardedSticker, setHasAwardedSticker] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
+  const [nameInput, setNameInput] = useState("");
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("username");
+    if (storedUser) {
+      setUsername(storedUser);
+      const storedStickers = localStorage.getItem(`stickers_${storedUser}`);
+      if (storedStickers) {
+        setCatStickers(JSON.parse(storedStickers));
+      }
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (username) {
+      localStorage.setItem(`stickers_${username}`, JSON.stringify(catStickers));
+    }
+  }, [catStickers, username]);
 
   useEffect(() => {
     if (time === 0 && isRunning && selectedInterval) {
       setIsRunning(false);
-      setCatStickers((prev) => [...prev, selectedSticker]);
-      setHasAwardedSticker(true);
+      if (!hasAwardedSticker) {
+        setCatStickers((prev) => [...prev, selectedSticker]);
+        setHasAwardedSticker(true);
+        setIsRewardModalOpen(true);
+      }
       setSelectedInterval(0);
-      setIsModalOpen(true);
     }
-  }, [time, isRunning, selectedSticker, setCatStickers, selectedInterval]);
+  }, [time, isRunning, selectedInterval, selectedSticker, setCatStickers, hasAwardedSticker]);
 
   useEffect(() => {
     if (isRunning) {
@@ -71,51 +96,94 @@ const Timer = () => {
     return `${remainderSec} sec`;
   };
 
+  const handleLogin = () => {
+    if (nameInput.trim()) {
+      localStorage.setItem("username", nameInput.trim());
+      setUsername(nameInput.trim());
+      setIsLoginModalOpen(false);
+      setCatStickers([]);
+    } else {
+      setUsername("Guest");
+      setIsLoginModalOpen(false);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("username");
+    setUsername(null);
+    setCatStickers([]);
+    setIsLoginModalOpen(true);
+  };
+
   return (
     <div className="timer-container">
-      <section className="interval-container">
-        <div>
-          {isModalOpen && (
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-              <h2>Modal Title</h2>
-              <p>This is modal content.</p>
-            </Modal>
-          )}
-        </div>
-        <div className="interval-container__interval-name">
-          {selectedInterval && time > 0 ? formatInterval(time) : "Choose time"}
-        </div>
-        <StickersContainer isRunning={isRunning} />
-        <div className="interval-container__interval-variants">
-          {TimerIntervals.map((interval, index) => (
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedInterval(interval.value);
-                if (!isRunning) setTime(interval.value);
-              }}
-              key={index}
-              className="btn-interval"
-            >
-              {interval.name}
-            </button>
-          ))}
-        </div>
-      </section>
-      <section className="btn-playback">
-        <button type="button" onClick={startTimer}>
-          {isRunning ? (
-            <CirclePause color="lightgray" size={60} />
-          ) : (
-            <CirclePlay color="#81b29a" size={60} />
-          )}
-        </button>
-        <button type="button" onClick={cancelTimer}>
-          {""}
-          <CircleStop color="gray" size={60} />
-        </button>
-      </section>
+      {isLoginModalOpen && (
+        <Modal isOpen={isLoginModalOpen} onClose={() => setIsRewardModalOpen(false)} onSubmitButtonClick={handleLogin} buttonText="Log in">
+          <h2>Welcome!</h2>
+          <p>Please enter your name to begin:</p>
+          <input
+            type="text"
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
+            placeholder="Your name"
+          />
+        </Modal>
+      )}
+
+      {isRewardModalOpen && (
+        <Modal isOpen={isRewardModalOpen} onClose={() => setIsRewardModalOpen(false)} onSubmitButtonClick={() => setIsRewardModalOpen(false)} buttonText="Close">
+          <h2>Great job!</h2>
+          <p>You earned a new sticker 🎉</p>
+        </Modal>
+      )}
+  {username && (
+        <section className="flexbox">
+          <h1>Hello, {username}!</h1>
+          <button className="button-main" type="button" onClick={logout}>
+            Logout
+          </button>
+        </section>
+      )}
+      <div>
+        <section className="interval-container">
+          <div className="interval-container__interval-name">
+            {selectedInterval && time > 0 ? formatInterval(time) : "Choose time"}
+          </div>
+          <StickersContainer isRunning={isRunning} />
+          <div className="interval-container__interval-variants">
+            {TimerIntervals.map((interval, index) => (
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedInterval(interval.value);
+                  if (!isRunning) setTime(interval.value);
+                }}
+                key={index}
+                className="button-main"
+              >
+                {interval.name}
+              </button>
+            ))}
+          </div>
+        </section>
+        <section className="btn-playback">
+          <button type="button" onClick={startTimer}>
+            {isRunning ? (
+              <CirclePause color="lightgray" size={60} />
+            ) : (
+              <CirclePlay color="#81b29a" size={60} />
+            )}
+          </button>
+          <button type="button" onClick={cancelTimer}>
+            {""}
+            <CircleStop color="gray" size={60} />
+          </button>
+        </section>
+      </div>
+
+    
     </div>
   );
 };
+
 export default Timer;

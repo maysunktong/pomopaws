@@ -27,6 +27,8 @@ type StickerPickerContextType = {
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmitButtonClick: () => void;
+  buttonText: string;
   children: React.ReactNode;
 }
 
