@@ -14,7 +14,6 @@ const TimerIntervals: TimerInterval[] = [
   { name: "1hr", value: 60 * 15 * 2 * 2 },
 ];
 
-
 const Timer = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [time, setTime] = useState(0);
@@ -56,7 +55,14 @@ const Timer = () => {
       }
       setSelectedInterval(0);
     }
-  }, [time, isRunning, selectedInterval, selectedSticker, setCatStickers, hasAwardedSticker]);
+  }, [
+    time,
+    isRunning,
+    selectedInterval,
+    selectedSticker,
+    setCatStickers,
+    hasAwardedSticker,
+  ]);
 
   useEffect(() => {
     if (isRunning) {
@@ -118,7 +124,12 @@ const Timer = () => {
   return (
     <div className="timer-container">
       {isLoginModalOpen && (
-        <Modal isOpen={isLoginModalOpen} onClose={() => setIsRewardModalOpen(false)} onSubmitButtonClick={handleLogin} buttonText="Log in">
+        <Modal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsRewardModalOpen(false)}
+          onSubmitButtonClick={handleLogin}
+          buttonText="Log in"
+        >
           <h2>Welcome!</h2>
           <p>Please enter your name to begin:</p>
           <input
@@ -131,12 +142,17 @@ const Timer = () => {
       )}
 
       {isRewardModalOpen && (
-        <Modal isOpen={isRewardModalOpen} onClose={() => setIsRewardModalOpen(false)} onSubmitButtonClick={() => setIsRewardModalOpen(false)} buttonText="Close">
+        <Modal
+          isOpen={isRewardModalOpen}
+          onClose={() => setIsRewardModalOpen(false)}
+          onSubmitButtonClick={() => setIsRewardModalOpen(false)}
+          buttonText="Close"
+        >
           <h2>Great job!</h2>
           <p>You earned a new sticker 🎉</p>
         </Modal>
       )}
-  {username && (
+      {username && (
         <section className="flexbox">
           <h1>Hello, {username}!</h1>
           <button className="button-main" type="button" onClick={logout}>
@@ -147,7 +163,9 @@ const Timer = () => {
       <div>
         <section className="interval-container">
           <div className="interval-container__interval-name">
-            {selectedInterval && time > 0 ? formatInterval(time) : "Choose time"}
+            {selectedInterval && time > 0
+              ? formatInterval(time)
+              : "Choose time"}
           </div>
           <StickersContainer isRunning={isRunning} />
           <div className="interval-container__interval-variants">
@@ -180,8 +198,6 @@ const Timer = () => {
           </button>
         </section>
       </div>
-
-    
     </div>
   );
 };
