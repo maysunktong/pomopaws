@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import Navigation from "../components/Navigation";
+import { UserProvider } from "../context/UserContext";
 
 export const metadata: Metadata = {
   title: "PomoPaws",
@@ -16,8 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="content-wrapper">
-          <Navigation />
-          <div className="main-container">{children}</div>
+          <UserProvider>
+            <Navigation />
+            <div className="main-container">{children}</div>
+          </UserProvider>
         </div>
       </body>
     </html>

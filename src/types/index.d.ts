@@ -24,6 +24,16 @@ type StickerPickerContextType = {
   setSelectedSticker: React.Dispatch<React.SetStateAction<string>>;
 };
 
+type UserContextType = {
+  username: string | null;
+  nameInput: string;
+  isLoginModalOpen: boolean;
+  setUsername: (name: string | null) => void;
+  setNameInput: (input: string) => void;
+  setIsLoginModalOpen: (open: boolean) => void;
+};
+
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;

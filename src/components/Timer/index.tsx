@@ -6,6 +6,7 @@ import { useCatsContext } from "../../context/CatsContext";
 import { useStickerPickerContext } from "../../context/StickerPickerContext";
 import StickersContainer from "../StickersContainer";
 import Modal from "../UI/Modal";
+import { useUserContext } from "../../context/UserContext";
 
 const TimerIntervals: TimerInterval[] = [
   { name: "Test", value: 3 },
@@ -22,9 +23,14 @@ const Timer = () => {
   const { selectedSticker } = useStickerPickerContext();
   const [hasAwardedSticker, setHasAwardedSticker] = useState(false);
   const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [username, setUsername] = useState<string | null>(null);
-  const [nameInput, setNameInput] = useState("");
+  const {
+    username,
+    nameInput,
+    setUsername,
+    setNameInput,
+    isLoginModalOpen,
+    setIsLoginModalOpen
+  } = useUserContext();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("username");
@@ -151,14 +157,6 @@ const Timer = () => {
           <h2>Great job!</h2>
           <p>You earned a new sticker 🎉</p>
         </Modal>
-      )}
-      {username && (
-        <section className="flexbox">
-          <h1>Hello, {username}!</h1>
-          <button className="button-main" type="button" onClick={logout}>
-            Logout
-          </button>
-        </section>
       )}
       <div>
         <section className="interval-container">
