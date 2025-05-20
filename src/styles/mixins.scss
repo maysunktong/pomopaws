@@ -27,6 +27,7 @@
   transition: $transition;
   font-weight: 500;
   aspect-ratio: $ratio;
+  text-align: center;
 
   @if $width != null {
     width: $width;

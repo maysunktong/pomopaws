@@ -120,13 +120,6 @@ const Timer = () => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("username");
-    setUsername(null);
-    setCatStickers([]);
-    setIsLoginModalOpen(true);
-  };
-
   return (
     <div className="timer-container">
       {isLoginModalOpen && (
@@ -181,8 +174,7 @@ const Timer = () => {
               </button>
             ))}
           </div>
-        </section>
-        <section className="btn-playback">
+          <section className="btn-playback">
           <button type="button" onClick={startTimer}>
             {isRunning ? (
               <CirclePause color="lightgray" size={60} />
@@ -195,6 +187,8 @@ const Timer = () => {
             <CircleStop color="gray" size={60} />
           </button>
         </section>
+        </section>
+        
       </div>
     </div>
   );
