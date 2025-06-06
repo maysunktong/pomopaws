@@ -31,6 +31,7 @@ body {
 }
 
 .content-wrapper {
+  flex-grow: 1;
   background-color: $color-background-light;
   border-radius: 12px;
   overflow: scroll;
@@ -38,13 +39,6 @@ body {
 
 .button-main {
   @include button($bg: $color-primary, $font-size: $font-size-xl);
-}
-
-.app-wrapper {
-  height: 90vh;
-  border-radius: 12px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 .timer-wrapper  {
@@ -79,6 +73,7 @@ body {
 .timer-container {
   @include flexbox($direction: column);
   max-height: 30rem;
+  flex-grow: 1;
 }
 
 .interval-container {
