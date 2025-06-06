@@ -2,12 +2,12 @@
 
 import { useCatsContext } from "../../context/CatsContext";
 
-const CatStickerContainer = () => {
+const StickerLog = () => {
   const { catStickers } = useCatsContext();
 
   return (
-    <div className="cats-container">
-      <div className="cats-container__inner">
+    <div>
+      <div>
         {catStickers.length > 0 ? (
           catStickers.map((sticker, index) => (
             <img
@@ -24,4 +24,4 @@ const CatStickerContainer = () => {
     </div>
   );
 };
-export default CatStickerContainer;
+export default StickerLog;

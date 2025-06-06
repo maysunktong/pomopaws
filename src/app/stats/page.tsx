@@ -1,6 +1,6 @@
+import StickerLog from "../../components/StickerLog";
+
 const Log = () => {
-  return (
-    <h1>History log of paws</h1>
-  );
-}
+  return <StickerLog />;
+};
 export default Log;

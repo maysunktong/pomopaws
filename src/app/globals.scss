@@ -13,9 +13,8 @@ body {
   display: flex;
   flex-direction: column;
   background-color: $color-background-primary;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem;
-  margin: 0;
   font-family: $font-capriola
 }
 
@@ -97,13 +96,6 @@ body {
 .cats-container {
   width: 100%;
   height: 95%;
-  background-image: url("/backgrounds/cattower.png");
-  background-size: contain;          
-  background-repeat: no-repeat;   
-  background-position: right;
-  display: flex;
-  justify-content: end;
-  align-items: flex-end;
 
   &__inner {
     padding: 3rem;
