@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useUserContext } from "../../context/UserContext";
+import { usePathname } from "next/navigation";
 
 const Navigation = () => {
   const { username, setUsername, setNameInput, setIsLoginModalOpen } =
@@ -13,6 +14,8 @@ const Navigation = () => {
     setNameInput("");
     setIsLoginModalOpen(true);
   };
+
+  const pathname = usePathname();
 
   const NavItemList: NavItemType[] = [
     { label: "Home", href: "/" },
@@ -31,15 +34,13 @@ const Navigation = () => {
             ))}
           </ul>
         </section>
-        {username ? (
+        {username && pathname === "/" && (
           <section>
             <h1>Hello, {username}!</h1>
             <button className="button-main" type="button" onClick={logout}>
               Logout
             </button>
           </section>
-        ) : (
-          <h1>Please log in</h1>
         )}
       </div>
     </nav>
