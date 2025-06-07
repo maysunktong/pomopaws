@@ -24,25 +24,28 @@ const Navigation = () => {
 
   return (
     <nav className="nav">
-      <div>
-        <section>
-          <ul>
-            {NavItemList.map((item, index) => (
-              <li key={index}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
-          </ul>
+      <section className="navbar-container">
+        {NavItemList.map((item, index) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className={`menu ${isActive ? "active" : ""}`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </section>
+      {username && (
+        <section className="username-container">
+          <p>Hello,{` ${username}`}!</p>
+          <button className="button-main" type="button" onClick={logout}>
+            Logout
+          </button>
         </section>
-        {username && pathname === "/" && (
-          <section>
-            <h1>Hello, {username}!</h1>
-            <button className="button-main" type="button" onClick={logout}>
-              Logout
-            </button>
-          </section>
-        )}
-      </div>
+      )}
     </nav>
   );
 };

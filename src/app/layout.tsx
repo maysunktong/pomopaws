@@ -21,7 +21,7 @@ export default function RootLayout({
         <div className="content-wrapper">
           <UserProvider>
             <Navigation />
-            <div className="main-container">
+            <div className="body-container">
               <CatsContextProvider>
                 <StickerPickerProvider>{children}</StickerPickerProvider>
               </CatsContextProvider>

@@ -15,32 +15,37 @@ body {
   background-color: $color-background-primary;
   min-height: 100vh;
   padding: 2rem;
-  font-family: $font-capriola
+  font-family: $font-capriola;
 }
 
-.nav {
+.body-container {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 3rem;
-  &__items  {
-    display: flex;
-    gap: 2rem;
-    font-size: $font-size-2xl
-  }
+  justify-content: center;
+  align-items: center;
 }
 
 .content-wrapper {
   flex-grow: 1;
   background-color: $color-background-light;
   border-radius: 12px;
-  overflow: scroll;
 }
 
 .button-main {
   @include button($bg: $color-primary, $font-size: $font-size-xl);
+  @include responsive-to(iphoneSE) {
+    font-size: 12px;
+  }
 }
 
-.timer-wrapper  {
+.button-clear {
+  @include button($bg: $color-secondary, $font-size: $font-size-xl);
+  @include responsive-to(iphoneSE) {
+    font-size: 12px;
+  }
+}
+
+.timer-wrapper {
   @include flexbox;
 }
 
@@ -53,10 +58,19 @@ body {
   padding: 1rem;
 
   &__button {
-    @include button($bg: $color-secondary, $hover-bg: $color-primary, $radius: 50%, $ratio: 1);
+    @include button(
+      $bg: $color-secondary,
+      $hover-bg: $color-primary,
+      $radius: 50%,
+      $ratio: 1
+    );
     img {
       min-width: 150px;
       margin: 3rem;
+      @include responsive-to(iphoneSE) {
+        width: 50px;
+        margin: 1rem;
+      }
     }
   }
 
@@ -71,7 +85,6 @@ body {
 
 .timer-container {
   @include flexbox($direction: column);
-  max-height: 30rem;
   flex-grow: 1;
 }
 
@@ -82,15 +95,41 @@ body {
     @include flexbox;
     font-size: $font-size-5xl;
     color: $color-background-primary;
+    @include responsive-to(iphoneSE) {
+      font-size: $font-size-2xl;
+    }
   }
 
   &__interval-variants {
     @include flexbox;
+    @include responsive-to(tablet) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.stickerlog-container {
+  @include flexbox($direction: column);
+}
+
+.stickerlog {
+  @include flexbox;
+  padding: 3rem 0;
+  flex-wrap: wrap;
+  color: gray;
+  @include responsive-to(tablet){
+    font-size: 12px;
+  }
+  & img {
+    @include responsive-to(tablet) {
+      width: 50px;
+    }
   }
 }
 
 .btn-playback button {
-   @include button($bg:transparent, $hover-bg: none);
+  @include button($bg: transparent, $hover-bg: none);
 }
 
 .cats-container {
@@ -104,10 +143,6 @@ body {
   }
 }
 
-.single-sticker {
-
-}
-
 /* Modal */
 .modal-overlay {
   @include overlay-style($overlay-bg-color, $overlay-z-index);
@@ -117,7 +152,11 @@ body {
 }
 
 .modal-container {
-  @include flexbox($direction: column, $justify-content: center, $gap: $space-2);
+  @include flexbox(
+    $direction: column,
+    $justify-content: center,
+    $gap: $space-2
+  );
   background-color: $modal-bg-color;
   padding: $modal-padding;
   border-radius: $modal-border-radius;
@@ -145,6 +184,53 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menu {
+  @include link;
+
+  &:hover {
+    background-color: lightgray;
+    color: brown;
+    border-radius: 12px 12px 0 0;
+  }
+
+  &.active {
+    background-color: rgb(247, 192, 89);
+    color: black;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+
+  @include responsive-to(iphoneSE) {
+    flex-direction: column;
+    font-size: 13px;
+    gap: 1rem;
+  }
+  @include responsive-to(tablet) {
+    flex-direction: column;
+  }
+}
+
+.navbar-container,
+.username-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  @include responsive-to(iphoneSE) {
+    gap: 12px;
+  }
 }

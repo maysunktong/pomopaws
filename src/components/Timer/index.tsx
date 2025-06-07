@@ -121,7 +121,7 @@ const Timer = () => {
   };
 
   return (
-    <div className="timer-container">
+    <div>
       {isLoginModalOpen && (
         <Modal
           isOpen={isLoginModalOpen}
@@ -188,7 +188,6 @@ const Timer = () => {
           </button>
         </section>
         </section>
-        
       </div>
     </div>
   );

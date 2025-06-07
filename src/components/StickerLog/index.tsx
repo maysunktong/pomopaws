@@ -3,18 +3,24 @@
 import { useCatsContext } from "../../context/CatsContext";
 
 const StickerLog = () => {
-  const { catStickers } = useCatsContext();
+  const { catStickers, setCatStickers } = useCatsContext();
 
+  const clearCatStickers = () => {
+    setCatStickers([]);
+  };
   return (
-    <div>
-      <div>
+    <div className="stickerlog-container">
+      <button type="button" onClick={clearCatStickers} className="button-clear">
+        Clear stickers
+      </button>
+      <div className="stickerlog">
         {catStickers.length > 0 ? (
           catStickers.map((sticker, index) => (
             <img
               key={index}
               src={sticker}
               alt={`Sticker ${index}`}
-              width={200}
+              width={100}
             />
           ))
         ) : (

@@ -111,6 +111,12 @@
   gap: $gap;
 }
 
+@mixin link($color: black) {
+  text-decoration: none;
+  color: $color;
+  list-style: none;
+}
+
 /* Modal */
 @mixin overlay-style($bg-color, $z-index) {
   position: fixed;
@@ -120,4 +126,13 @@
   height: 100vh;
   background-color: $bg-color;
   z-index: $z-index;
+}
+
+/* media queries */
+@mixin responsive-to($breakpoint) {
+  @if $breakpoint == iphoneSE {
+    @media (max-width: 375px) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (max-width: 900px) { @content; }
+  }
 }
