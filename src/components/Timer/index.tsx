@@ -136,6 +136,7 @@ const Timer = () => {
             value={nameInput}
             onChange={(e) => setNameInput(e.target.value)}
             placeholder="Your name"
+            className="input-bar"
           />
         </Modal>
       )}
